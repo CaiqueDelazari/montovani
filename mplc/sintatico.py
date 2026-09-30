@@ -164,6 +164,9 @@ class Parser:
 
     def comando(self):
         tok = self.atual()
+        if tok.tipo == 'ABRE_CHAVE':
+            # bloco solto: so abre um escopo novo (LINGUAGEM.md 4.7)
+            return self.bloco()
         if tok.tipo in TIPOS:
             return self.declaracao()
         if tok.tipo == 'SE':

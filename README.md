@@ -208,7 +208,7 @@ tipo           = "inteiro" | "real" | "logico" | "texto" | "vazio" ;
 
 bloco          = "{" { comando } "}" ;
 comando        = declaracao | atribuicao | se | enquanto
-               | escreva | retorne | chamada ";" ;
+               | escreva | retorne | chamada ";" | bloco ;
 declaracao     = tipo ID [ "=" expressao ] ";" ;
 atribuicao     = ID "=" expressao ";" ;
 se             = "se" "(" expressao ")" bloco [ "senao" bloco ] ;
@@ -243,6 +243,8 @@ Decisões que a gramática não mostra sozinha:
 
 - `comando` que começa com `ID` olha **um token à frente**: `=` é atribuição,
   `(` é chamada. Qualquer outra coisa é erro, apontado nesse segundo token.
+- Um `{ ... }` solto dentro de outro bloco é um comando: vira um nó `bloco`
+  filho, e a semântica abre um escopo novo para ele (seção 4.7).
 - O parêntese não gera nó: `(1 + 2) * 3` já sai com o `+` embaixo do `*`.
 - O erro sintático é relatado no token que apareceu no lugar do esperado.
   Faltando `;`, o erro cai no primeiro token da linha seguinte; faltando `}`,
