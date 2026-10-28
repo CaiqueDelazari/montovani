@@ -254,6 +254,22 @@ Decisões que a gramática não mostra sozinha:
 
 ---
 
+## Escopos (Entrega 3)
+
+Representamos os escopos como uma **árvore**: cada objeto `Escopo` guarda
+os seus nomes num dicionário e tem um ponteiro para o escopo pai. Uma busca
+começa no escopo atual e sobe pelos pais até achar o nome; por isso a
+variável de dentro esconde a de fora (sombreamento) e, ao fechar o bloco,
+voltamos para o pai e a de fora aparece de novo. Escolhemos árvore em vez de
+uma pilha que descarta o escopo ao fechar porque **nenhum escopo é jogado
+fora**: todos ficam guardados na ordem em que abriram, o que o `--tabela`
+precisa para imprimir tudo e a Entrega 4 vai precisar para dar uma posição
+de memória a cada nome. A verificação é feita em duas passadas: a primeira
+coleta só as assinaturas das funções, para uma função poder ser chamada antes
+de aparecer no arquivo.
+
+---
+
 ## Como entregar
 
 1. `git push` no repositório do grupo.
